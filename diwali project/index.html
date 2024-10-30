@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Diwali</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: linear-gradient(#000428, #004e92);
+            height: 100vh;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: Arial, sans-serif;
+        }
+
+        .container {
+            position: relative;
+            width: 100%;
+            height: 100%;
+        }
+
+        .moon {
+            position: absolute;
+            top: 50px;
+            right: 100px;
+            width: 80px;
+            height: 80px;
+            background: #ffd700;
+            border-radius: 50%;
+            box-shadow: 0 0 20px #ffd700;
+        }
+
+        .diya {
+            position: absolute;
+            bottom: 0;
+            width: 40px;
+            height: 20px;
+            background: #8B4513;
+            border-radius: 50% 50% 0 0;
+        }
+
+        .flame {
+            position: absolute;
+            bottom: 18px;
+            left: 15px;
+            width: 10px;
+            height: 20px;
+            background: #FFA500;
+            border-radius: 50% 50% 20% 20%;
+            transform-origin: center bottom;
+            animation: flicker 0.5s infinite alternate;
+        }
+
+        .firecracker {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: #ff4444;
+            border-radius: 50%;
+            animation: explosion 1.5s infinite;
+        }
+
+        .message {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: #fff;
+            font-size: 48px;
+            text-align: center;
+            text-shadow: 0 0 10px #ffd700;
+            z-index: 100;
+        }
+
+        @keyframes flicker {
+            0% { transform: scaleY(1); }
+            100% { transform: scaleY(1.2); }
+        }
+
+        @keyframes explosion {
+            0% {
+                transform: scale(1);
+                opacity: 1;
+            }
+            50% {
+                transform: scale(20);
+                opacity: 0.5;
+            }
+            100% {
+                transform: scale(40);
+                opacity: 0;
+            }
+        }
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="moon"></div>
+        <div class="message">
+            <h1>Happy Diwali</h1>
+            <p>May your life be as bright as the diyas</p>
+        </div>
+    </div>
+
+    <script>
+        function createDiyas() {
+            const container = document.querySelector('.container');
+            for(let i = 0; i < 20; i++) {
+                const diya = document.createElement('div');
+                diya.className = 'diya';
+                const flame = document.createElement('div');
+                flame.className = 'flame';
+                diya.appendChild(flame);
+                diya.style.left = Math.random() * 90 + 5 + '%';
+                diya.style.bottom = '0px';
+                container.appendChild(diya);
+            }
+        }
+
+        function createFirecrackers() {
+            const container = document.querySelector('.container');
+            setInterval(() => {
+                const firecracker = document.createElement('div');
+                firecracker.className = 'firecracker';
+                firecracker.style.left = Math.random() * 100 + '%';
+                firecracker.style.top = Math.random() * 50 + '%';
+                firecracker.style.backgroundColor = `hsl(${Math.random() * 360}, 100%, 50%)`;
+                container.appendChild(firecracker);
+                
+                setTimeout(() => {
+                    firecracker.remove();
+                }, 1500);
+            }, 500);
+        }
+
+        window.onload = () => {
+            createDiyas();
+            createFirecrackers();
+        }
+    </script>
+</body>
+</html>
